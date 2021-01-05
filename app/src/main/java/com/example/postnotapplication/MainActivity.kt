@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         val firebaseDatabase = FirebaseDatabase.getInstance();
         val reference = firebaseDatabase.getReference()
         reference.child("Arduino").addValueEventListener(object : ValueEventListener{
