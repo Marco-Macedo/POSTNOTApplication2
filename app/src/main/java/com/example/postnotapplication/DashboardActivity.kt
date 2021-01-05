@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
 
 class DashboardActivity : AppCompatActivity() {
+
+    private val CHANNEL_ID = "cha"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
