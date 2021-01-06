@@ -15,6 +15,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -27,12 +28,14 @@ class DashboardActivity : AppCompatActivity() {
 
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationId = 101
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         var database = FirebaseDatabase.getInstance().reference
         //database.setValue("entrei")
-
+        auth = FirebaseAuth.getInstance()
         createNotificationChannel()     // chama a funcao createNOtificationChannel
 
         var getdata = object : ValueEventListener {
@@ -116,10 +119,7 @@ class DashboardActivity : AppCompatActivity() {
         return when (item.itemId) {
 
             R.id.logout -> {
-                /* var token = getSharedPreferences("myKey", Context.MODE_PRIVATE)
-                 var editor = token.edit()
-                 editor.putString("firebasekey"," ")        // Iguala valor a vazio, fica sem valor, credenciais soltas
-                 editor.commit()*/
+                auth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 true
