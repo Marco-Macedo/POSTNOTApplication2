@@ -50,7 +50,7 @@ class DashboardActivity : AppCompatActivity() {
                     sb.append("Estado: $state")
                     if(state == "Aberta")
                     {
-                       Toast.makeText(
+                        Toast.makeText(
                             baseContext,
                             "CORREIO FOI ABERTO",
                             Toast.LENGTH_SHORT

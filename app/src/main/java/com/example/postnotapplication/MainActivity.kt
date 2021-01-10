@@ -4,15 +4,18 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     // Variáveis globais //
     private lateinit var auth: FirebaseAuth
     //  private var loginuser : Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +47,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
-
-
-
         val firebaseDatabase = FirebaseDatabase.getInstance();
         val reference = firebaseDatabase.getReference()
         reference.child("Arduino").addValueEventListener(object : ValueEventListener{
@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         )
+
     }
 
     fun login(view: View) {
@@ -139,5 +140,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
 
 }
