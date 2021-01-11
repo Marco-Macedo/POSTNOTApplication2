@@ -124,6 +124,11 @@ class DashboardActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
+            R.id.historico -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
