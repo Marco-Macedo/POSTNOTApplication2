@@ -38,6 +38,7 @@ class DashboardActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         createNotificationChannel()     // chama a funcao createNOtificationChannel
 
+
         var getdata = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -60,8 +61,6 @@ class DashboardActivity : AppCompatActivity() {
                     }
                 }
                 state.setText(sb)
-
-
 
             }
         }
@@ -125,7 +124,7 @@ class DashboardActivity : AppCompatActivity() {
                 true
             }
             R.id.historico -> {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, HistoricoDados::class.java)
                 startActivity(intent)
                 true
             }
