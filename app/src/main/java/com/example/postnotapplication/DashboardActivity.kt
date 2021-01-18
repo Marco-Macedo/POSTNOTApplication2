@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -29,6 +30,8 @@ class DashboardActivity : AppCompatActivity() {
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationId = 101
     private lateinit var auth: FirebaseAuth
+    private var idsharedpreference : Int = 0
+    private lateinit var nomesharedpreference : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +40,41 @@ class DashboardActivity : AppCompatActivity() {
         //database.setValue("entrei")
         auth = FirebaseAuth.getInstance()
         createNotificationChannel()     // chama a funcao createNOtificationChannel
-
-
+        var token = getSharedPreferences("key", Context.MODE_PRIVATE)
+        nomesharedpreference = token.getString("caixadecorreio"," ").toString()
+        findViewById<TextView>(R.id.nomedacaixadecorreio).setText(nomesharedpreference)
         var getdata = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                var sb = StringBuilder()
-                //for(a in snapshot.children){
-                    var state = snapshot.child("Historico/caixadecorreio").getValue()
+
+               if(nomesharedpreference == "a") {
+                   var sb = StringBuilder()
+                   //for(a in snapshot.children){
+                   var state = snapshot.child("a/caixadecorreio").getValue()
+                   sb.append("Estado: $state")
+                   if (state == "Aberta") {
+                       Toast.makeText(
+                               baseContext,
+                               "CORREIO FOI ABERTO",
+                               Toast.LENGTH_SHORT
+                       ).show()
+
+                       sendNotification()
+                   }
+                   //}
+
+                   estado.setText(sb)
+
+               }
+                else if(nomesharedpreference == "b") {
+                    var sb = StringBuilder()
+                    //for(a in snapshot.children){
+                    var state = snapshot.child("b/caixadecorreio").getValue()
                     sb.append("Estado: $state")
-                    if(state == "Aberta")
-                    {
+                    if (state == "Aberta") {
                         Toast.makeText(
                                 baseContext,
                                 "CORREIO FOI ABERTO",
@@ -59,11 +83,15 @@ class DashboardActivity : AppCompatActivity() {
 
                         sendNotification()
                     }
-                //}
+                    //}
 
-                estado.setText(sb)
+                    estado.setText(sb)
 
-
+                }
+                else
+               {
+                   estado.setText("Caixa de Correio sem estado")
+               }
             }
         }
 
@@ -123,6 +151,10 @@ class DashboardActivity : AppCompatActivity() {
 
             R.id.logout -> {
                 auth.signOut()
+                var token = getSharedPreferences("key", Context.MODE_PRIVATE)
+                var editor = token.edit()
+                editor.putString("caixadecorreio"," ")        // Iguala valor a vazio, fica sem valor, credenciais soltas
+                editor.commit()                                     // Atualizar editor
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 true

@@ -1,5 +1,6 @@
 package com.example.postnotapplication
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -75,6 +76,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun doLogin() {
         // VALIDAR EMAIL E PASSWORD
+
+
+        val caixadecorreio = caixadecorreio.text.toString().trim()
+        var token = getSharedPreferences("key", Context.MODE_PRIVATE)
+        var editor = token.edit()
+        editor.putString("caixadecorreio",caixadecorreio)
+        editor.commit()
 
 
         if(email.text.toString().isEmpty()) {

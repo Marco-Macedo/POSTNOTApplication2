@@ -8,6 +8,29 @@
     android:background="@drawable/imagem">
 
 
+    <EditText
+        android:id="@+id/caixadecorreio"
+        android:layout_width="317dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@color/white"
+        android:hint="Caixa de Correio"
+        android:paddingLeft="17dp"
+        android:paddingTop="13dp"
+        android:paddingRight="17dp"
+        android:paddingBottom="13dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_bias="0.743"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/title"
@@ -65,7 +88,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794"
+        app:layout_constraintVertical_bias="0.888"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -114,7 +137,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.103"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -123,12 +146,12 @@
         android:layout_height="58dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:onClick="registar"
-        android:textColor="@color/white"
         android:text="Não tenho uma Conta, registar-me!"
+        android:textColor="@color/white"
         app:backgroundTint="@color/Crimson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
