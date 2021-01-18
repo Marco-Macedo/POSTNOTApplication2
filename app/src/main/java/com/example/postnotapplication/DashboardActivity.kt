@@ -46,24 +46,27 @@ class DashboardActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 var sb = StringBuilder()
-                for(i in snapshot.children){
-                    var state = i.child("caixadecorreio").getValue()
+                //for(a in snapshot.children){
+                    var state = snapshot.child("Historico/caixadecorreio").getValue()
                     sb.append("Estado: $state")
                     if(state == "Aberta")
                     {
                         Toast.makeText(
-                            baseContext,
-                            "CORREIO FOI ABERTO",
-                            Toast.LENGTH_SHORT
+                                baseContext,
+                                "CORREIO FOI ABERTO",
+                                Toast.LENGTH_SHORT
                         ).show()
 
                         sendNotification()
                     }
-                }
-                state.setText(sb)
+                //}
+
+                estado.setText(sb)
+
 
             }
         }
+
         database.addValueEventListener(getdata)
         database.addListenerForSingleValueEvent(getdata)
 
@@ -94,7 +97,8 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun createNotificationChannel() {
+    private fun createNotificationChannel() {   //criacao do formato da notificao
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
             val name = "Notification Title"

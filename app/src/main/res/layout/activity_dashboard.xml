@@ -62,7 +62,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/state"
+        android:id="@+id/estado"
         android:layout_width="332dp"
         android:layout_height="82dp"
         android:text="textView"

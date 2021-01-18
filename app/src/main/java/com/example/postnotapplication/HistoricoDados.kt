@@ -28,14 +28,24 @@ class HistoricoDados : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 var sb = StringBuilder()
-                for(i in snapshot.children){
 
-                    var dia = i.child("dia").getValue()
-                    var mes = i.child("mes").getValue()
-                    var hora = i.child("hora").getValue()
-                    var minutos = i.child("minutos").getValue()
-                    sb.append("$hora"+"h"+"$minutos : $dia $mes -> Aberto\n")
+
+                    var Janeiro = snapshot.child("Atualizado/2021/janeiro").getValue()
+                    var Fevereiro = snapshot.child("Atualizado/2021/fevereiro").getValue()
+
+                //var mes = snapshot.child("Historico/mes").getValue()
+                    //var hora = snapshot.child("Historico/hora").getValue()
+                    //var minutos = snapshot.child("Historico/minutos").getValue()
+                    //sb.append("$hora"+"h"+"$minutos : $dia $mes -> Aberto\n")
+                if(Janeiro != null)
+                {
+                    sb.append("$Janeiro")
                 }
+                else
+                {
+                   TextView.setText("Ainda não há dados neste sensor")
+                }
+
                 TextView.setText(sb)
             }
         }
