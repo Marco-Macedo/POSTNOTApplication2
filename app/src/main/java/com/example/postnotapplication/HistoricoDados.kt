@@ -36,7 +36,9 @@ class HistoricoDados : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var sb = StringBuilder()
 
-                    var Janeiro = snapshot.child(nomesharedpreference + "/2021/janeiro").getValue()
+                    var Janeiro = snapshot.child(nomesharedpreference + "/2021/janeiro").getValue() // historico de dados
+                    //var Fevereiro = snapshot.child(nomesharedpreference + "/2021/fevereiro").getValue() // historico de dados
+                    // var Março = snapshot.child(nomesharedpreference + "/2021/março").getValue() // historico de dados
                     if (Janeiro != null) {
                         sb.append("$Janeiro")
                         TextView.setText(sb)

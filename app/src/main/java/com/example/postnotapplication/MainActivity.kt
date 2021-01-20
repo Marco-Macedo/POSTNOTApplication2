@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         )
 
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     fun login(view: View) {
         doLogin()
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun doLogin() {
         // VALIDAR EMAIL E PASSWORD
 
+    // SHARED PREFERENCE DA CAIXA DE CORREIO LOGADA
 
         val caixadecorreio = caixadecorreio.text.toString().trim()
         var token = getSharedPreferences("key", Context.MODE_PRIVATE)
@@ -84,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         editor.putString("caixadecorreio",caixadecorreio)
         editor.commit()
 
+        ////////////////////////////////////////////////////////////////////
 
         if(email.text.toString().isEmpty()) {
             email.error = "Please enter email"
@@ -107,12 +111,11 @@ class MainActivity : AppCompatActivity() {
 
         auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
+                if (task.isSuccessful) {        // caso email exista e seja verificado
                     val user = auth.currentUser
-                    updateUI(user)
+                    updateUI(user)      // entra na funcao updateUI
 
                 } else {
-
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
@@ -137,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
         if(currentUser != null){
           //  if(currentUser.isEmailVerified) {           // EMAIL É VERIFICADO?? Entra na
-                startActivity(Intent(this, DashboardActivity::class.java))
+                startActivity(Intent(this, DashboardActivity::class.java))          // Entra na nova atividade
                 Toast.makeText(this, email.text.toString(), Toast.LENGTH_SHORT).show()
                 finish()    // close app
             //}else{

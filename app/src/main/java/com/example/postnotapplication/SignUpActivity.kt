@@ -30,13 +30,13 @@ class SignUpActivity : AppCompatActivity() {
 
         // Verifiar se o email é valido ou nao //
 
-        if(registaremail.text.toString().isEmpty()) {
+        if(registaremail.text.toString().isEmpty()) {   // caso email nao seja bem escrito
             registaremail.error = "Please enter email"
             registaremail.requestFocus()
             return
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(registaremail.text.toString()).matches()){
+        if(!Patterns.EMAIL_ADDRESS.matcher(registaremail.text.toString()).matches()){   // email invalido
             registaremail.error = "Please enter valid email"
             registaremail.requestFocus()
             return
@@ -44,7 +44,7 @@ class SignUpActivity : AppCompatActivity() {
 
         //*********************************************************************************
         // PASSWORD
-        if(registarpassword.text.toString().isEmpty()){
+        if(registarpassword.text.toString().isEmpty()){     // password nao registada.
             registarpassword.error= "Please enter password"
             registarpassword.requestFocus()
             return
@@ -62,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     user!!.sendEmailVerification()          // envia um email de verificacao
                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {            // email verificado? volta para a mainactivity e e-mail está agora verificado
+                            if (task.isSuccessful) {
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }

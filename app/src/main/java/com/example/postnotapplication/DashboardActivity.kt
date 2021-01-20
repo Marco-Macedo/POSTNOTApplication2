@@ -50,7 +50,7 @@ class DashboardActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                    var sb = StringBuilder()
                    //for(a in snapshot.children){
-                   var state = snapshot.child(nomesharedpreference + "/caixadecorreio").getValue()
+                   var state = snapshot.child(nomesharedpreference + "/caixadecorreio").getValue()  // estado atual da caixa de correio
                    sb.append("Estado: $state")
                    if(state != null) {
                        if (state == "Aberta") {
@@ -60,13 +60,13 @@ class DashboardActivity : AppCompatActivity() {
                                    Toast.LENGTH_SHORT
                            ).show()
 
-                           sendNotification()
+                           sendNotification()   // entra na funcao sendNotification para mandar uma notificacao.
                        }
                        estado.setText(sb)
                    }
                    else
                    {
-                       estado.setText("Caixa de Correio sem estado")
+                       estado.setText("Caixa de Correio sem estado")    // caixa de correio nao existe
                    }
             }
         }
@@ -76,7 +76,7 @@ class DashboardActivity : AppCompatActivity() {
 
     }
 
-    private fun sendNotification() {
+    private fun sendNotification() {    // funcao para mandar uma notificacao
 
         // imagem
         val intent = Intent(this, MainActivity::class.java).apply {
@@ -84,14 +84,14 @@ class DashboardActivity : AppCompatActivity() {
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
-        val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.caixacorreio)
+        val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.caixacorreio)    // colocar imagem na notificacao
 
         // send notification
-        val builder = NotificationCompat.Builder(this,CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Caixa de Correio")
-            .setContentText("ABERTA")
-            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+        val builder = NotificationCompat.Builder(this,CHANNEL_ID)       // utilizacao do channel ID definido em cima
+            .setSmallIcon(R.drawable.caixacorreio)  // icon da app
+            .setContentTitle("Caixa de Correio")        // titulo
+            .setContentText("ABERTA")               // texto
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))  // compactar notificao
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
@@ -125,6 +125,7 @@ class DashboardActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.logout -> {
                 auth.signOut()
+                nomesharedpreference = " "
                 var token = getSharedPreferences("key", Context.MODE_PRIVATE)
                 var editor = token.edit()
                 editor.putString("caixadecorreio"," ")        // Iguala valor a vazio, fica sem valor, credenciais soltas
