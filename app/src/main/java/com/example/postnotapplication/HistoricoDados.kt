@@ -36,42 +36,15 @@ class HistoricoDados : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var sb = StringBuilder()
 
-                if (nomesharedpreference == "a") {
-                    var Janeiro = snapshot.child("a/2021/janeiro").getValue()
-                    var Fevereiro = snapshot.child("a/2021/fevereiro").getValue()
-
-                    //var mes = snapshot.child("Historico/mes").getValue()
-                    //var hora = snapshot.child("Historico/hora").getValue()
-                    //var minutos = snapshot.child("Historico/minutos").getValue()
-                    //sb.append("$hora"+"h"+"$minutos : $dia $mes -> Aberto\n")
+                    var Janeiro = snapshot.child(nomesharedpreference + "/2021/janeiro").getValue()
                     if (Janeiro != null) {
                         sb.append("$Janeiro")
+                        TextView.setText(sb)
                     }
-                    if (Fevereiro != null) {
-                        sb.append("$Fevereiro")
+                    else
+                    {
+                        TextView.setText("Caixa de correio sem dados.")
                     }
-                    TextView.setText(sb)
-                }
-                else if (nomesharedpreference == "b")
-                {
-                    var Janeiro = snapshot.child("b/2021/janeiro").getValue()
-                    var Fevereiro = snapshot.child("b/2021/fevereiro").getValue()
-
-                    //var mes = snapshot.child("Historico/mes").getValue()
-                    //var hora = snapshot.child("Historico/hora").getValue()
-                    //var minutos = snapshot.child("Historico/minutos").getValue()
-                    //sb.append("$hora"+"h"+"$minutos : $dia $mes -> Aberto\n")
-                    if (Janeiro != null) {
-                        sb.append("$Janeiro")
-                    }
-                    if (Fevereiro != null) {
-                        sb.append("$Fevereiro")
-                    }
-                    TextView.setText(sb)
-                }
-                else {
-                    TextView.setText("Ainda não há dados nesta caixa de correio(sensor)")
-                }
             }
         }
         database.addValueEventListener(getdata)

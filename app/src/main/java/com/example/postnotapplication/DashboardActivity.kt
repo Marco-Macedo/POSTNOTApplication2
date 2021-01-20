@@ -30,7 +30,6 @@ class DashboardActivity : AppCompatActivity() {
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationId = 101
     private lateinit var auth: FirebaseAuth
-    private var idsharedpreference : Int = 0
     private lateinit var nomesharedpreference : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,55 +48,31 @@ class DashboardActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-
-               if(nomesharedpreference == "a") {
                    var sb = StringBuilder()
                    //for(a in snapshot.children){
-                   var state = snapshot.child("a/caixadecorreio").getValue()
+                   var state = snapshot.child(nomesharedpreference + "/caixadecorreio").getValue()
                    sb.append("Estado: $state")
-                   if (state == "Aberta") {
-                       Toast.makeText(
-                               baseContext,
-                               "CORREIO FOI ABERTO",
-                               Toast.LENGTH_SHORT
-                       ).show()
+                   if(state != null) {
+                       if (state == "Aberta") {
+                           Toast.makeText(
+                                   baseContext,
+                                   "CORREIO FOI ABERTO",
+                                   Toast.LENGTH_SHORT
+                           ).show()
 
-                       sendNotification()
+                           sendNotification()
+                       }
+                       estado.setText(sb)
                    }
-                   //}
-
-                   estado.setText(sb)
-
-               }
-                else if(nomesharedpreference == "b") {
-                    var sb = StringBuilder()
-                    //for(a in snapshot.children){
-                    var state = snapshot.child("b/caixadecorreio").getValue()
-                    sb.append("Estado: $state")
-                    if (state == "Aberta") {
-                        Toast.makeText(
-                                baseContext,
-                                "CORREIO FOI ABERTO",
-                                Toast.LENGTH_SHORT
-                        ).show()
-
-                        sendNotification()
-                    }
-                    //}
-
-                    estado.setText(sb)
-
-                }
-                else
-               {
-                   estado.setText("Caixa de Correio sem estado")
-               }
+                   else
+                   {
+                       estado.setText("Caixa de Correio sem estado")
+                   }
             }
         }
 
         database.addValueEventListener(getdata)
         database.addListenerForSingleValueEvent(getdata)
-
 
     }
 
@@ -148,7 +123,6 @@ class DashboardActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when (item.itemId) {
-
             R.id.logout -> {
                 auth.signOut()
                 var token = getSharedPreferences("key", Context.MODE_PRIVATE)
